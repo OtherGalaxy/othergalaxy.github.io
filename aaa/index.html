@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -162,6 +162,89 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/28/List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="OtherGalaxy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OtherGalaxy's Blog">
+      <meta itemprop="description" content="追寻自由和乐趣的人生">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | OtherGalaxy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/28/List/" class="post-title-link" itemprop="url">数据结构作业：单链表的实现、最大值和反转</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-09-28 00:00:00 / 修改时间：01:21:17" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2022/09/28/List/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2022/09/28/List/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ListNode</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  T value&#123;&#125;;</span><br><span class="line">  ListNode* next = <span class="literal">nullptr</span>;  <span class="comment">// 默认赋空值，避免野指针</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">List</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ListNode&lt;T&gt;* head;</span><br><span class="line">    <span class="comment">// 寻找链表第一个最大值的下标</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">()</span> <span class="type">const</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> max_value = head-&gt;value, i = <span class="number">1</span>, max_index = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">auto</span>* node = head;</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node-&gt;value &gt; max_value) &#123;</span><br><span class="line">                max_value = node-&gt;value;</span><br><span class="line">                max_index = i;</span><br><span class="line">            &#125;</span><br><span class="line">            ++ i;</span><br><span class="line">            node = node-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 迭代法反转链表</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">auto</span> node = head-&gt;next;</span><br><span class="line">        head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">/* 等价于ruby中的head, node, node.next = node, node.next, head while node</span></span><br><span class="line"><span class="comment">         * C++交换变量必须借助中间变量</span></span><br><span class="line"><span class="comment">         * 注意赋值的先后顺序</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;    </span><br><span class="line">            <span class="keyword">auto</span> temp1 = node;</span><br><span class="line">            <span class="keyword">auto</span> temp2 = node-&gt;next;</span><br><span class="line">            <span class="keyword">auto</span> temp3 = head;</span><br><span class="line">            head = temp1;</span><br><span class="line">            node-&gt;next = temp3;</span><br><span class="line">            node = temp2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -697,12 +780,12 @@
     
     <div class="post-body" itemprop="articleBody">
           
-        <div id="aplayer-prPwqYPq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-JZCcoJkk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-prPwqYPq"),
+            element: document.getElementById("aplayer-JZCcoJkk"),
             narrow: false,
             autoplay: true,
             showlrc: false,
@@ -838,7 +921,7 @@
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-server-lac.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/aaa/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-server-lac.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"中国大陆地区无法使用","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/aaa/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
