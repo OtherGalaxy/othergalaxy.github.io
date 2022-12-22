@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/profile.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/profile.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/profile.jpg">
+  <link rel="mask-icon" href="/images/profile.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="把下面的话翻译成中文：英語→発音記号→カタカナという方法で変換します。 The CMU Pronouncing Dictionaryカーネギーメロン大学が公開している発音辞書です。http:&#x2F;&#x2F;www.speech.cs.cmu.edu&#x2F;cgi-bin&#x2F;cmudictおよそ13万4000語が収録されています。（発音のバリーションを除くとおよそ12万5000語）英語→発音記号の変換にはこれを使わせて">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reverse Linked List">
+<meta property="og:url" content="http://example.com/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/index.html">
+<meta property="og:site_name" content="OtherGalaxy&#39;s Blog">
+<meta property="og:description" content="把下面的话翻译成中文：英語→発音記号→カタカナという方法で変換します。 The CMU Pronouncing Dictionaryカーネギーメロン大学が公開している発音辞書です。http:&#x2F;&#x2F;www.speech.cs.cmu.edu&#x2F;cgi-bin&#x2F;cmudictおよそ13万4000語が収録されています。（発音のバリーションを除くとおよそ12万5000語）英語→発音記号の変換にはこれを使わせて">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-22T14:35:11.260Z">
+<meta property="article:author" content="OtherGalaxy">
+<meta property="article:tag" content="Japanese">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/","path":"2022/09/24/片仮名と英語の変換/","title":"Reverse Linked List"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Reverse Linked List | OtherGalaxy's Blog</title>
+  
+
+
+
+
+
+<link rel="dns-prefetch" href="waline-server-lac.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/images/profile.jpg" alt="OtherGalaxy's Blog">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">OtherGalaxy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">追寻自由和乐趣的人生</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="OtherGalaxy"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">OtherGalaxy</p>
+  <div class="site-description" itemprop="description">追寻自由和乐趣的人生</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="OtherGalaxy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OtherGalaxy's Blog">
+      <meta itemprop="description" content="追寻自由和乐趣的人生">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Reverse Linked List | OtherGalaxy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Reverse Linked List
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-24 00:00:00" itemprop="dateCreated datePublished" datetime="2022-09-24T00:00:00+08:00">2022-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-22 22:35:11" itemprop="dateModified" datetime="2022-12-22T22:35:11+08:00">2022-12-22</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>把下面的话翻译成中文：<br>英語→発音記号→カタカナ<br>という方法で変換します。</p>
+<p>The CMU Pronouncing Dictionary<br>カーネギーメロン大学が公開している発音辞書です。<br><a target="_blank" rel="noopener" href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">http://www.speech.cs.cmu.edu/cgi-bin/cmudict</a><br>およそ13万4000語が収録されています。<br>（発音のバリーションを除くとおよそ12万5000語）<br>英語→発音記号の変換にはこれを使わせてもらいます。<br>発音記号にはARPAbetが使われています。<br>ENGLISH　　→　　IH NG G L IH SH<br>↑こんな感じに変換されます。</p>
+<p>発音記号→カタカナ<br>発音記号からカタカナへの変換は自作したルールベースで行います。<br>（くわしくは後述）</p>
+<p>変換処理の作成<br>データの準備<br><a target="_blank" rel="noopener" href="http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b">http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b</a><br><a target="_blank" rel="noopener" href="http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/scripts/make_baseform.pl">http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/scripts/make_baseform.pl</a><br>上記の2つのファイルをダウンロードして、以下のコマンドを実行します。</p>
+<p>perl make_baseform.pl cmudict-0.7b cmudict-0.7b_baseform<br>作成された、 cmudict-0.7b_baseform を使います。</p>
+<p>変換処理<br>発音の分類<br>発音記号は以下の39種類です。<br>AA,AE,AH,AO,AW,AY,B,CH,D,DH,EH,ER,EY,F,G,HH,IH,IY,JH,K,L,M,N,NG,OW,OY,P,R,S,SH,T,TH,UH,UW,V,W,Y,Z,ZH<br>カタカナへの変換の便宜上、これらを「母音」「子音」に分けて考えます。<br>母音は15種類ありますが、これらを a i u e o の5音に割り振ります。<br>AE,AW,AY,ER　→　a<br>IH,IY　→　i<br>UH,UW　→　u<br>EH,EY　→　e<br>AO,OW,OY　→　o<br>AA,AH　→　未定</p>
+<p>母音のうち AA,AH は曖昧母音です。<br>どの母音なのか判然としない母音ですが、カタカナ表記するためには a i u e o のいずれかに割り振らないとなりません。<br>表記を考慮して、 a i e o のいずれかに割り振るようにしてみました。<br>（発音位置に近い位置にある母音表記を採用する方式。ただし、u は a にする。）</p>
+<p>カタカナへの変換<br>・子音+母音の場合<br>母音と子音の組み合わせをカタカナに変換します。</p>
+<p>#カタカナへの変換用辞書<br>{<br>‘B’:{‘a’:’バ’,’i’:’ビ’,’u’:’ブ’,’e’:’ベ’,’o’:’ボ’,’’:’ブ’},<br>‘CH’:{‘a’:’チャ’,’i’:’チ’,’u’:’チュ’,’e’:’チェ’,’o’:’チョ’,’’:’チ’},<br>‘D’:{‘a’:’ダ’,’i’:’ディ’,’u’:’ドゥ’,’e’:’デ’,’o’:’ド’,’’:’ド’},<br>‘DH’:{‘a’:’ザ’,’i’:’ジ’,’u’:’ズ’,’e’:’ゼ’,’o’:’ゾ’,’’:’ズ’},<br>‘F’:{‘a’:’ファ’,’i’:’フィ’,’u’:’フ’,’e’:’フェ’,’o’:’フォ’,’’:’フ’},<br>‘G’:{‘a’:’ガ’,’i’:’ギ’,’u’:’グ’,’e’:’ゲ’,’o’:’ゴ’,’’:’グ’},<br>‘HH’:{‘a’:’ハ’,’i’:’ヒ’,’u’:’フ’,’e’:’ヘ’,’o’:’ホ’,’’:’フ’},<br>‘JH’:{‘a’:’ジャ’,’i’:’ジ’,’u’:’ジュ’,’e’:’ジェ’,’o’:’ジョ’,’’:’ジ’},<br>‘K’:{‘a’:’カ’,’i’:’キ’,’u’:’ク’,’e’:’ケ’,’o’:’コ’,’’:’ク’},<br>‘L’:{‘a’:’ラ’,’i’:’リ’,’u’:’ル’,’e’:’レ’,’o’:’ロ’,’’:’ル’},<br>‘M’:{‘a’:’マ’,’i’:’ミ’,’u’:’ム’,’e’:’メ’,’o’:’モ’,’’:’ム’},<br>‘N’:{‘a’:’ナ’,’i’:’ニ’,’u’:’ヌ’,’e’:’ネ’,’o’:’ノ’,’’:’ン’},<br>‘NG’:{‘a’:’ンガ’,’i’:’ンギ’,’u’:’ング’,’e’:’ンゲ’,’o’:’ンゴ’,’’:’ング’},<br>‘P’:{‘a’:’パ’,’i’:’ピ’,’u’:’プ’,’e’:’ペ’,’o’:’ポ’,’’:’プ’},<br>‘R’:{‘a’:’ラ’,’i’:’リ’,’u’:’ル’,’e’:’レ’,’o’:’ロ’,’’:’ー’},<br>‘S’:{‘a’:’サ’,’i’:’シ’,’u’:’ス’,’e’:’セ’,’o’:’ソ’,’’:’ス’},<br>‘SH’:{‘a’:’シャ’,’i’:’シ’,’u’:’シュ’,’e’:’シェ’,’o’:’ショ’,’’:’シュ’},<br>‘T’:{‘a’:’タ’,’i’:’ティ’,’u’:’チュ’,’e’:’テ’,’o’:’ト’,’’:’ト’},<br>‘TH’:{‘a’:’サ’,’i’:’シ’,’u’:’シュ’,’e’:’セ’,’o’:’ソ’,’’:’ス’},<br>‘V’:{‘a’:’バ’,’i’:’ビ’,’u’:’ブ’,’e’:’ベ’,’o’:’ボ’,’’:’ブ’},<br>‘W’:{‘a’:’ワ’,’i’:’ウィ’,’u’:’ウ’,’e’:’ウェ’,’o’:’ウォ’,’’:’ウ’},<br>‘Y’:{‘a’:’ア’,’i’:’’,’u’:’ュ’,’e’:’エ’,’o’:’ョ’,’’:’イ’},<br>‘BOS_Y’:{‘a’:’ヤ’,’i’:’イ’,’u’:’ユ’,’e’:’イエ’,’o’:’ヨ’,’’:’イ’},<br>‘Z’:{‘a’:’ザ’,’i’:’ジ’,’u’:’ズ’,’e’:’ゼ’,’o’:’ゾ’,’’:’ズ’},<br>‘ZH’:{‘a’:’ジャ’,’i’:’ジ’,’u’:’ジュ’,’e’:’ジェ’,’o’:’ジョ’,’’:’ジュ’},<br>‘T_S’:{‘a’:’ツァ’,’i’:’ツィ’,’u’:’ツ’,’e’:’ツェ’,’o’:’ツォ’,’’:’ツ’},<br>}</p>
+<p>・子音が連続する場合<br>子音単独でカタカナに変換します。<br>例）　T　→　ト<br>前述の変換用辞書の各子音の末尾にこれらのデータを追加しました。</p>
+<p>特殊なルール<br>・子音を含む母音は後続が子音の場合と母音の場合で変化する。<br>　・Y音を含む母音（AY EY OY）<br>　・W音を含む母音（AY EY OY）<br>　・R音を含む母音（ER）<br>・T S の組み合わせ（1個の子音扱いに）<br>・NG + K または G の組み合わせ（G音の削除）<br>・D Z の組み合わせ（D音の削除）<br>・Y の処理（拗音またはヤ行に変換）<br>・R の処理<br>この辺のルールは変換結果を見ながら調整していきます。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Japanese/" rel="tag"># Japanese</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/24/Reverse%20Linked%20List/" rel="prev" title="Reverse Linked List">
+                  <i class="fa fa-chevron-left"></i> Reverse Linked List
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/24/Linear_Algebra/" rel="next" title="UEC 2021 Linear Algebra(情報・ネットワーク工学専攻)">
+                  UEC 2021 Linear Algebra(情報・ネットワーク工学専攻) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OtherGalaxy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"per_page":true,"cdn":"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"waline-server-lac.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"中国大陆地区无法使用","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2022/09/24/%E7%89%87%E4%BB%AE%E5%90%8D%E3%81%A8%E8%8B%B1%E8%AA%9E%E3%81%AE%E5%A4%89%E6%8F%9B/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
